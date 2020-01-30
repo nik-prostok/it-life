@@ -2,8 +2,8 @@ import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
 import { CategoryController } from './api/controllers/CategoryController';
-import {MongoHelper} from "../util/MongoHelper";
-import {Config} from "./config/Config";
+import {MongoHelper} from '../util/MongoHelper';
+import {Config} from './config/Config';
 
 export class App extends Server {
 

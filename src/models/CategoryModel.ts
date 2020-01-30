@@ -6,10 +6,10 @@ export interface ICategory extends Document {
     lastName: string;
 }
 
-const CategorySchema: Schema = new Schema({
+const categorySchema: Schema = new Schema({
     email: { type: String, required: true, unique: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true }
 });
 
-export const Category: Model<ICategory> = model<ICategory>('Category', CategorySchema);
+export const category: Model<ICategory> = model<ICategory>('Category', categorySchema);
