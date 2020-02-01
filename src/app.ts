@@ -1,9 +1,10 @@
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
-import { CategoryController } from './api/controllers/CategoryController';
-import {MongoHelper} from '../util/MongoHelper';
+// import { CategoryController } from './controllers/CategoryController';
+import { MongooseHelper } from '../util/MongooseHelper';
 import {Config} from './config/Config';
+import {EventController} from "./controllers/EventController";
 
 export class App extends Server {
 
@@ -15,16 +16,17 @@ export class App extends Server {
     }
 
     private setupControllers(): void {
-        const categoryController = new CategoryController();
+        // const categoryController = new CategoryController();
         const urlDB = new Config().getDB();
-        MongoHelper.connect(urlDB)
+        MongooseHelper.connect(urlDB)
             .then(() => {
-                Logger.Info('Connected to mongodb Atlas');
+                console.log('Mongoose connected')
             })
             .catch(err => {
-                Logger.Err(err);
+                console.log(err);
             })
-        super.addControllers([categoryController]/*, optional router here*/);
+        const eventController = new EventController();
+        super.addControllers([eventController]/*, optional router here*/);
     }
 
     public start(port: number): void {

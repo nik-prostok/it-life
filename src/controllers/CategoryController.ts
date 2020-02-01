@@ -6,7 +6,7 @@ import {CategoryService} from '../services/CategoryService';
 @Controller('category')
 export class CategoryController {
 
-    @Get()
+    /*@Get()
     private async getMessage(req: Request, res: Response) {
         await CategoryService.getAllCategory()
             .then((categories) => {
@@ -16,7 +16,7 @@ export class CategoryController {
                 Logger.Err(err);
                 res.status(400).send(err);
             })
-    }
+    }*/
 
     @Post()
     private async postMessage(req: Request, res: Response) {

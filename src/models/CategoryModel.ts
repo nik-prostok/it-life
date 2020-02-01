@@ -1,15 +1,23 @@
-import { Document, Schema, Model, model} from 'mongoose';
+import {Document, Schema, Model, model} from 'mongoose';
+import EventInterface from './interfaces/EventInterface';
 
-export interface ICategory extends Document {
-    email: string;
-    firstName: string;
-    lastName: string;
+export interface ICategoryEvent extends Document {
+    nameCategory: string,
+    events: [
+        EventInterface['_id']
+    ],
 }
 
-const categorySchema: Schema = new Schema({
-    email: { type: String, required: true, unique: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true }
+const categoryEventSchema: Schema = new Schema({
+    nameCategory: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    events: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Event'
+    }]
 });
 
-export const category: Model<ICategory> = model<ICategory>('Category', categorySchema);
+export const category: Model<ICategoryEvent> = model<ICategoryEvent>('CategoryEvent', categoryEventSchema);
