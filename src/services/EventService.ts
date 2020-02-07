@@ -73,6 +73,13 @@ export class EventService {
                 let categoryService = new CategoryService(categoryEventSchema);
                 // @ts-ignore
                 let nextCategory: ICategoryEvent = await categoryService.getCategoryById(currentEvent.nextCategory);
+                if (stateGame.choice) {
+                    // тут выбираем событие при "хорошем" раскладе
+                } else {
+                    // тут при плохом
+                }
+
+                // ну а пока тут всегда 0 плохое событие
                 // @ts-ignore
                 let nextEvent: IEvent = await this.getEventById(nextCategory.badEvents[0]);
                 resolve(nextEvent);
