@@ -5,12 +5,11 @@ import {Logger} from '@overnightjs/logger';
 
 export class CategoryService {
 
-    /*public static getAllCategory(): DocumentQuery<ICategoryEvent[], ICategoryEvent> & {} {
+    public static getAllCategory(): DocumentQuery<ICategoryEvent[], ICategoryEvent> & {} {
         return CategoryModel.find();
-    };*/
+    };
 
     public static createCategory(newCategory: ICategoryEvent): Promise<ICategoryEvent> {
-        // console.log(newCategory);
         return CategoryModel.create(newCategory);
     }
 }

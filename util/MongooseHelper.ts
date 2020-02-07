@@ -4,7 +4,7 @@ export class MongooseHelper {
 
     public static connect(url: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            mongoose.connect(url, { useNewUrlParser: true });
+            mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
             (<any>mongoose).Promise = global.Promise;
             mongoose.set('useCreateIndex', true)
             mongoose.connection

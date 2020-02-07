@@ -6,8 +6,8 @@ import {CategoryService} from '../services/CategoryService';
 @Controller('category')
 export class CategoryController {
 
-    /*@Get()
-    private async getMessage(req: Request, res: Response) {
+    @Get()
+    private async getCategories(req: Request, res: Response) {
         await CategoryService.getAllCategory()
             .then((categories) => {
                 res.status(200).send(categories);
@@ -16,11 +16,11 @@ export class CategoryController {
                 Logger.Err(err);
                 res.status(400).send(err);
             })
-    }*/
+    }
 
     @Post()
-    private async postMessage(req: Request, res: Response) {
-        await CategoryService.createCategory(req.body.newCategory)
+    private async addCategory(req: Request, res: Response) {
+        await CategoryService.createCategory(req.body)
             .then(createdCategory => {
                 console.log(createdCategory);
                 res.status(200).send(createdCategory);
@@ -29,25 +29,5 @@ export class CategoryController {
                 console.log(err);
                 res.status(400).send(err);
             })
-    }
-
-    @Put(':msg')
-    private putMessage(req: Request, res: Response) {
-        Logger.Info(req.params.msg);
-        return res.status(400).json({
-            error: req.params.msg,
-        });
-    }
-
-    @Delete(':msg')
-    private delMessage(req: Request, res: Response) {
-        try {
-            throw new Error(req.params.msg);
-        } catch (err) {
-            Logger.Err(err, true);
-            return res.status(400).json({
-                error: req.params.msg,
-            });
-        }
     }
 }

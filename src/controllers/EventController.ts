@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { Controller, Get, Put, Post, Delete } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
-import { eventSchema } from "../models/EventModel";
-import EventInterface from "../models/interfaces/EventInterface";
+import { eventSchema } from '../models/EventModel';
 import { EventService } from '../services/EventService';
 
 @Controller('event')
@@ -28,7 +27,6 @@ export class EventController {
 
     @Post()
     private async addEvent(req: Request, res: Response) {
-        // console.log(req.body)
         await this.eventService.createEvent(req.body)
             .then((createdEvent) => {
                 res.status(200).send(createdEvent);

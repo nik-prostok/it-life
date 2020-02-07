@@ -4,7 +4,7 @@ import { Logger } from '@overnightjs/logger';
 // import { CategoryController } from './controllers/CategoryController';
 import { MongooseHelper } from '../util/MongooseHelper';
 import {Config} from './config/Config';
-import {EventController} from "./controllers/EventController";
+import {EventController} from './controllers/EventController';
 
 export class App extends Server {
 
