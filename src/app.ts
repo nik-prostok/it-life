@@ -1,10 +1,10 @@
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
-// import { CategoryController } from './controllers/CategoryController';
 import { MongooseHelper } from '../util/MongooseHelper';
 import {Config} from './config/Config';
 import {EventController} from './controllers/EventController';
+import {CategoryController} from "./controllers/CategoryController";
 
 export class App extends Server {
 
@@ -16,7 +16,6 @@ export class App extends Server {
     }
 
     private setupControllers(): void {
-        // const categoryController = new CategoryController();
         const urlDB = new Config().getDB();
         MongooseHelper.connect(urlDB)
             .then(() => {
@@ -26,7 +25,8 @@ export class App extends Server {
                 console.log(err);
             })
         const eventController = new EventController();
-        super.addControllers([eventController]/*, optional router here*/);
+        const categoryController = new CategoryController();
+        super.addControllers([eventController, categoryController]/*, optional router here*/);
     }
 
     public start(port: number): void {

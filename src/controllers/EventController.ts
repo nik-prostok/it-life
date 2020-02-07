@@ -20,7 +20,6 @@ export class EventController {
                 res.status(200).send(events);
             })
             .catch((err) => {
-                Logger.Err(err);
                 res.status(400).send(err);
             })
     }
@@ -32,7 +31,17 @@ export class EventController {
                 res.status(200).send(createdEvent);
             })
             .catch((err) => {
-                console.log(err);
+                res.status(400).send(err);
+            })
+    }
+
+    @Post('next')
+    private async getNextEvent(req: Request, res: Response) {
+        await this.eventService.getNextEvent(req.body)
+            .then((nextEvent) => {
+                res.status(200).send(nextEvent);
+            })
+            .catch(err => {
                 res.status(400).send(err);
             })
     }

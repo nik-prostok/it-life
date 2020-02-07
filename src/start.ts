@@ -1,4 +1,4 @@
 import { App } from './app';
 
 const app = new App();
-app.start(8080);
+app.start(3000);
