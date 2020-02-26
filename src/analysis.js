@@ -33,51 +33,57 @@ function checkSkales (health,time,money)
 
 function сategorySelection (skill)
 {
+  var id
 	var cat
+  var maxLevel = updateBDmax()
 	if (skill == 1) {
-		id = generateNumber()
+		id = generateNumber(maxLevel[0])
 		cat = [1,id]
    		return(cat)
   	} else if (skill == 2) {
-  		id = generateNumber()
+  		id = generateNumber(maxLevel[1])
 		cat = [2,id]
    		return(cat)
   	} else if (skill == 3) {
- 		id = generateNumber()
+ 		id = generateNumber(maxLevel[2])
 		cat = [3,id]
    		return(cat)
  	} else if (skill == 4) {
-  		id = generateNumber()
+  		id = generateNumber(maxLevel[3])
 		cat = [4,id]
    		return(cat)
   	} else if (skill == 5) {
- 		id = generateNumber()
+ 		id = generateNumber(maxLevel[4])
 		cat = [5,id]
    		return(cat)
  	} else if (skill == 6) {
-  		id = generateNumber()
+  		id = generateNumber(maxLevel[5])
 		cat = [6,id]
    		return(cat)
   	} else if (skill == 7) {
- 		id = generateNumber()
+ 		id = generateNumber(maxLevel[6])
 		cat = [7,id]
    		return(cat)
  	} else if (skill == 8) {
-  		id = generateNumber()
+  		id = generateNumber(maxLevel[7])
 		cat = [8,id]
    		return(cat)
   	} else if (skill == 9) {
- 		id = generateNumber()
+ 		id = generateNumber(maxLevel[8])
 		cat = [9,id]
    		return(cat)
  	} else if (skill == 10) {
- 		id = generateNumber()
+ 		id = generateNumber(maxLevel[9])
 		cat = [10,id]
    		return(cat)
  	} else {
     	return('invalid value')
   	}
 
+}
+
+function updateBDmax (){
+  //запрос в бд
 }
 
 function generateNumber (){
