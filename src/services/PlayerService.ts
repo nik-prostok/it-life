@@ -1,4 +1,5 @@
 import { IPlayer } from '../models/PlayerModel';
+import {ChangeValue} from "../models/EventModel";
 import {Schema} from 'mongoose';
 import * as mongoose from "mongoose";
 
@@ -8,7 +9,7 @@ export class PlayerService {
 
 
     constructor(playerSchema: Schema) {
-        this.playerModel = mongoose.model<IPlayer>('IPlayer', playerSchema);
+        this.playerModel = mongoose.model<IPlayer>('Player', playerSchema);
     }
 
 
@@ -35,6 +36,18 @@ export class PlayerService {
                 })
         })
     }
+    public changePlayerValue(id: string, change:ChangeValue) {
+        return new Promise(async (resolve, reject) => {
+            await this.playerModel.findByIdAndUpdate(id, change)
+                .then((resBD) =>{
+                    resolve(resBD);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
+
 
     public createPlayer(newPlayer: IPlayer): Promise<mongoose.Document> {
         return new Promise(async(resolve, reject) => {

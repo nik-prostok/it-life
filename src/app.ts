@@ -27,10 +27,9 @@ export class App extends Server {
                 console.log(err);
             })
         const eventController = new EventController();
-        const categoryController = new CategoryController();
         const targetController = new TargetController();
         const playerController = new PlayerController();
-        super.addControllers([eventController, categoryController,targetController,playerController]/*, optional router here*/);
+        super.addControllers([eventController,targetController,playerController]/*, optional router here*/);
     }
 
     public start(port: number): void {

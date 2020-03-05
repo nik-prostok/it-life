@@ -31,6 +31,7 @@ export const playerSchema: Schema = new Schema({
         required: true, 
     },
     target: {
+        required: true,
         type: Schema.Types.ObjectId,
         ref: 'Target',
     },

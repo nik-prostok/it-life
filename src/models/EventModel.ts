@@ -1,47 +1,96 @@
 import {Document, model, Model, Schema} from 'mongoose';
-import {ICategoryEvent} from "./CategoryModel";
+import {ITarget} from "./TargetModel";
+
+export interface ChangeValue extends Document {
+    healthValue: number,
+    timeValue: number,
+    moneyValue: number,
+    skillValue: number
+}
 
 export interface IEvent extends Document {
-    nameEvent: string,
-    healthChangeValue: number,
-    timeChangeValue: number,
-    moneyChangeValue: number,
-    skillChangeValue: number,
-    nextCategory: ICategoryEvent['_id'],
+    textEvent: string,
+    up:ChangeValue,
+    down:ChangeValue,
+    allowingSkill: number,
+    textUp: string,
+    textDown: string,
+    target: ITarget['_id'],
 }
 
 export const eventSchema: Schema = new Schema({
-    nameEvent: {
+    textEvent: {
         type: String,
         required: true,
     },
-    nextCategory: {
+    allowingSkill: {
+        type: Number,
+        required: true,
+    },
+    textUp: {
+        type: String,
+        required: true,
+    },
+    textDown: {
+        type: String,
+        required: true,
+    },
+    target: {
         type: Schema.Types.ObjectId,
-        ref: 'CategoryEvent'
+        ref: 'Target'
     },
-    healthChangeValue: {
-        type: Number,
-        required: true,
-        min: -10,
-        max: 10,
+    up:{
+        healthChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
+        timeChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
+        moneyChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
+        skillChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
     },
-    timeChangeValue: {
-        type: Number,
-        required: true,
-        min: -10,
-        max: 10,
-    },
-    moneyChangeValue: {
-        type: Number,
-        required: true,
-        min: -10,
-        max: 10,
-    },
-    skillChangeValue: {
-        type: Number,
-        required: true,
-        min: -10,
-        max: 10,
+
+    down:{
+        healthChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
+        timeChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
+        moneyChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
+        skillChangeValue: {
+            type: Number,
+            required: true,
+            min: -10,
+            max: 10,
+        },
     },
 });
 

@@ -1,12 +1,15 @@
 import {IEvent} from '../models/EventModel';
 import * as mongoose from "mongoose";
 import {Schema} from "mongoose";
-import {CategoryService} from "./CategoryService";
+import {PlayerService} from "./PlayerService";
+import {playerSchema, IPlayer} from "../models/PlayerModel";
+
 import {categoryEventSchema, ICategoryEvent} from "../models/CategoryModel";
 
 interface IStateGame {
     currentEventId: string,
     choice: boolean,
+    idPlayer: string,
 }
 
 export class EventService {
@@ -65,17 +68,46 @@ export class EventService {
         })
     }
 
+    public findEventsBySkillAndTarget(skill: number, targetId: string) {
+        console.log(skill);
+        return new Promise( async (resolve, reject) => {
+            await this.eventModel.find({allowingSkill: skill, target: targetId})
+                .then((resBD) =>{
+                    console.log(resBD);
+                    resolve(resBD);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
+
+    private generateNumber (min: number, max: number){
+        let rand = min + Math.random() * (max + 1);
+        return(Math.floor(rand))
+    }
+
+
     public getNextEvent(stateGame: IStateGame) {
         return new Promise(async (resolve, reject) => {
             try {
                 // @ts-ignore
-                let currentEvent: IEvent = await this.getEventById(stateGame.currentEventId);
-                let categoryService = new CategoryService(categoryEventSchema);
+                const currentEvent: IEvent = await this.getEventById(stateGame.currentEventId);
+                const playerService = new PlayerService(playerSchema);
+                if (stateGame.choice){
+                    playerService.changePlayerValue(stateGame.idPlayer,currentEvent.up);
+                } else {
+                    playerService.changePlayerValue(stateGame.idPlayer,currentEvent.down);
+                }
+                
+                
+                const player = await playerService.getPlayerById(stateGame.idPlayer)
                 // @ts-ignore
-                let nextCategory: ICategoryEvent = await categoryService.getCategoryById(currentEvent.nextCategory);
+                console.log(player.target);
                 // @ts-ignore
-                let nextEvent: IEvent = await this.getEventById(nextCategory.badEvents[0]);
-                resolve(nextEvent);
+                const availableEvents: [IEvent] = await this.findEventsBySkillAndTarget(Math.floor(player.skillValue), player.target);
+                console.log(availableEvents);
+                resolve(availableEvents[this.generateNumber(0, availableEvents.length)]);
             } catch (err) {
                 reject(err)
             }

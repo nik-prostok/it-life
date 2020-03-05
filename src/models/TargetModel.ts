@@ -1,18 +1,13 @@
 import {Document, model, Model, Schema} from 'mongoose';
-import {ICategoryEvent} from "./CategoryModel";
+import {IEvent} from "./EventModel";
 
 export interface ITarget extends Document {
-    nameTarget: string,
-    availableCategory: [ICategoryEvent['_id']]
+    nameTarget: string
 }
 
 export const targetSchema: Schema = new Schema({
     nameTarget: {
         type: String,
         required: true,
-    },
-    availableCategory: [{
-        type: Schema.Types.ObjectId,
-        ref: 'CategoryEvent'
-    }],
+    }
 })
