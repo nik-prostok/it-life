@@ -3,12 +3,7 @@ import {IEvent} from "./EventModel";
 
 export interface ICategoryEvent extends Document {
     nameCategory: string,
-    badEvents: [
-        IEvent['_id']
-    ],
-    goodEvents: [
-        IEvent['_id']
-    ],
+    allowingSkill: number
 }
 
 export const categoryEventSchema: Schema = new Schema({
@@ -16,14 +11,12 @@ export const categoryEventSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    badEvents: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Event'
-    }],
-    goodEvents: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Event'
-    }]
+    allowingSkill: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 10
+    }
 });
 
 // export const categoryModel: Model<ICategoryEvent> = model<ICategoryEvent>('CategoryEvent', categoryEventSchema);

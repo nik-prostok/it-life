@@ -5,6 +5,8 @@ import { MongooseHelper } from '../util/MongooseHelper';
 import {Config} from './config/Config';
 import {EventController} from './controllers/EventController';
 import {CategoryController} from "./controllers/CategoryController";
+import { TargetController } from './controllers/TargetController';
+import { PlayerController } from './controllers/PlayerController';
 
 export class App extends Server {
 
@@ -25,8 +27,9 @@ export class App extends Server {
                 console.log(err);
             })
         const eventController = new EventController();
-        const categoryController = new CategoryController();
-        super.addControllers([eventController, categoryController]/*, optional router here*/);
+        const targetController = new TargetController();
+        const playerController = new PlayerController();
+        super.addControllers([eventController,targetController,playerController]/*, optional router here*/);
     }
 
     public start(port: number): void {
