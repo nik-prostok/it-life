@@ -103,8 +103,6 @@ export class EventService {
                 
                 const player = await playerService.getPlayerById(stateGame.idPlayer)
                 // @ts-ignore
-                console.log(player.target);
-                // @ts-ignore
                 const availableEvents: [IEvent] = await this.findEventsBySkillAndTarget(Math.floor(player.skillValue), player.target);
                 console.log(availableEvents);
                 resolve(availableEvents[this.generateNumber(0, availableEvents.length)]);
