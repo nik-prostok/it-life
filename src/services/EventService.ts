@@ -1,4 +1,4 @@
-import {IEvent} from '../models/EventModel';
+import {IEvent, ChangeValue} from '../models/EventModel';
 import * as mongoose from "mongoose";
 import {Schema} from "mongoose";
 import {PlayerService} from "./PlayerService";
@@ -10,12 +10,6 @@ interface IStateGame {
     currentEventId: string,
     choice: boolean,
     idPlayer: string,
-}
-interface FinalyValue {
-    healthValue: number,
-    timeValue: number,
-    moneyValue: number,
-    skillValue: number,
 }
 
 export class EventService {
@@ -92,8 +86,18 @@ export class EventService {
         let rand = min + Math.random() * (max + 1);
         return(Math.floor(rand))
     }
-    private finalyValue(values: FinalyValue,player:IPlayer){
-
+    private finalyValue(values: ChangeValue,player:IPlayer){
+        let finalyValues = {
+            healthValue: 0,
+            timeValue: 0,
+            moneyValue: 0,
+            skillValue: 0,
+        };
+        finalyValues.healthValue = values.healthValue + player.healthValue;
+        finalyValues.timeValue = values.timeValue + player.timeValue;
+        finalyValues.moneyValue = values.moneyValue + player.moneyValue;
+        finalyValues.skillValue = values.skillValue + player.skillValue;
+        return finalyValues;
     }
 
 
@@ -105,10 +109,11 @@ export class EventService {
                 const playerService = new PlayerService(playerSchema);
                 const player: IPlayer = await playerService.getPlayerById(stateGame.idPlayer);
                 if (stateGame.choice){
-                    this.finalyValue(currentEvent.up,player.timeValue); 
-                    playerService.changePlayerValue(stateGame.idPlayer,currentEvent.up);
+                    let valuesUpdate=this.finalyValue(currentEvent.up,player); 
+                    playerService.changePlayerValue(stateGame.idPlayer,valuesUpdate);
                 } else {
-                    playerService.changePlayerValue(stateGame.idPlayer,currentEvent.down);
+                    let valuesUpdate=this.finalyValue(currentEvent.down,player); 
+                    playerService.changePlayerValue(stateGame.idPlayer,valuesUpdate);
                 }
                 // @ts-ignore
                 console.log(player.target);
