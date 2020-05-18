@@ -107,13 +107,18 @@ export class EventService {
                 // @ts-ignore
                 const currentEvent: IEvent = await this.getEventById(stateGame.currentEventId);
                 const playerService = new PlayerService(playerSchema);
+                // @ts-ignore
+
                 const player: IPlayer = await playerService.getPlayerById(stateGame.idPlayer);
                 if (stateGame.choice){
-                    let valuesUpdate=this.finalyValue(currentEvent.up,player); 
-                    playerService.changePlayerValue(stateGame.idPlayer,valuesUpdate);
+                    // @ts-ignore
+
+                    let valuesUpdate: ChangeValue = this.finalyValue(currentEvent.up,player);
+                    playerService.changePlayerValue(stateGame.idPlayer, valuesUpdate);
                 } else {
-                    let valuesUpdate=this.finalyValue(currentEvent.down,player); 
-                    playerService.changePlayerValue(stateGame.idPlayer,valuesUpdate);
+                    // @ts-ignore
+                    let valuesUpdate: ChangeValue =this.finalyValue(currentEvent.down,player);
+                    playerService.changePlayerValue(stateGame.idPlayer, valuesUpdate);
                 }
                 // @ts-ignore
                 console.log(player.target);

@@ -36,7 +36,7 @@ export class PlayerService {
                 })
         })
     }
-    public changePlayerValue(id: string, change:ChangeValue) {
+    public changePlayerValue(id: string, change: ChangeValue) {
         return new Promise(async (resolve, reject) => {
             await this.playerModel.findByIdAndUpdate(id, change)
                 .then((resBD) =>{
