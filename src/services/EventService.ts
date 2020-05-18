@@ -11,6 +11,12 @@ interface IStateGame {
     choice: boolean,
     idPlayer: string,
 }
+interface FinalyValue {
+    healthValue: number,
+    timeValue: number,
+    moneyValue: number,
+    skillValue: number,
+}
 
 export class EventService {
 
@@ -86,6 +92,9 @@ export class EventService {
         let rand = min + Math.random() * (max + 1);
         return(Math.floor(rand))
     }
+    private finalyValue(values: FinalyValue,player:IPlayer){
+
+    }
 
 
     public getNextEvent(stateGame: IStateGame) {
@@ -94,14 +103,13 @@ export class EventService {
                 // @ts-ignore
                 const currentEvent: IEvent = await this.getEventById(stateGame.currentEventId);
                 const playerService = new PlayerService(playerSchema);
+                const player: IPlayer = await playerService.getPlayerById(stateGame.idPlayer);
                 if (stateGame.choice){
+                    this.finalyValue(currentEvent.up,player.timeValue); 
                     playerService.changePlayerValue(stateGame.idPlayer,currentEvent.up);
                 } else {
                     playerService.changePlayerValue(stateGame.idPlayer,currentEvent.down);
                 }
-                
-                
-                const player = await playerService.getPlayerById(stateGame.idPlayer)
                 // @ts-ignore
                 console.log(player.target);
                 // @ts-ignore

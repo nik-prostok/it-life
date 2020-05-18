@@ -4,7 +4,6 @@ import { Logger } from '@overnightjs/logger';
 import { MongooseHelper } from '../util/MongooseHelper';
 import {Config} from './config/Config';
 import {EventController} from './controllers/EventController';
-import {CategoryController} from "./controllers/CategoryController";
 import { TargetController } from './controllers/TargetController';
 import { PlayerController } from './controllers/PlayerController';
 
