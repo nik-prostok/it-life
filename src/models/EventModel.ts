@@ -40,25 +40,25 @@ export const eventSchema: Schema = new Schema({
         ref: 'Target'
     },
     up:{
-        healthChangeValue: {
+        healthValue: {
             type: Number,
             required: true,
             min: -10,
             max: 10,
         },
-        timeChangeValue: {
+        timeValue: {
             type: Number,
             required: true,
             min: -10,
             max: 10,
         },
-        moneyChangeValue: {
+        moneyValue: {
             type: Number,
             required: true,
             min: -10,
             max: 10,
         },
-        skillChangeValue: {
+        skillValue: {
             type: Number,
             required: true,
             min: -10,
@@ -67,25 +67,25 @@ export const eventSchema: Schema = new Schema({
     },
 
     down:{
-        healthChangeValue: {
+        healthValue: {
             type: Number,
             required: true,
             min: -10,
             max: 10,
         },
-        timeChangeValue: {
+        timeValue: {
             type: Number,
             required: true,
             min: -10,
             max: 10,
         },
-        moneyChangeValue: {
+        moneyValue: {
             type: Number,
             required: true,
             min: -10,
             max: 10,
         },
-        skillChangeValue: {
+        skillValue: {
             type: Number,
             required: true,
             min: -10,
