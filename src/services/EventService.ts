@@ -83,7 +83,7 @@ export class EventService {
     }
 
     private generateNumber (min: number, max: number){
-        let rand = min + Math.random() * (max + 1);
+        let rand = min + Math.random() * (max);
         return(Math.floor(rand))
     }
     private finalyValue(values: ChangeValue,player:IPlayer){
